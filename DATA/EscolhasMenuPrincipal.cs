@@ -10,6 +10,7 @@ class MenuPrincipal
     {
       case "a":
       case "A":
+        Criar.Personagem();
         break;
 
       case "l":
