@@ -1,10 +1,11 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
 
 public class Criar
 {
   public static void Personagem()
-  {
-
-    int ID;
+  {  
     string nome;
 
     float experiencia = 0;
@@ -39,10 +40,6 @@ public class Criar
     Console.Write("Name: ");
     nome = Console.ReadLine();
 
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("===================================");
-    Console.ResetColor();
-
     while(true)
     {
       Console.Clear();
@@ -55,18 +52,18 @@ public class Criar
       totalAtributos = totalAtributos + atributosGastos;
 
 
-      if(totalAtributos < atributo)
+      if(atributosGastos <= atributo)
       {
         Console.WriteLine($"You have {atributo - atributosGastos} point(s) to spend in your attributes.");
       }
       else
       {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Your character has {totalAtributos - atributo} point(s) in excess.");
+        Console.WriteLine($"Your character has {atributo - atributosGastos} point(s) in excess.");
         Console.ResetColor();
       }
       
-      Console.WriteLine("To select an attribute you need to type the FIRST letter of that attribute.\nTo remove points put the minus sing.\nFinishing the character you can press x and enter to proceed.");
+      Console.WriteLine("To select an attribute you need to type the FIRST letter of that attribute.\nTo remove points put the minus sing.\nFinishing the character you can press 'x' and enter to proceed.");
 
       Console.WriteLine("==============================");
 
@@ -81,7 +78,7 @@ public class Criar
         Console.WriteLine($"Strength({forcaTotal})");
       }
 
-      if(destreza == 0)
+      if(destrezaTotal == 0)
       {
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine($"Dexterity({destrezaTotal})");
@@ -92,7 +89,7 @@ public class Criar
         Console.WriteLine($"Dexterity({destrezaTotal})");
       }
 
-      if(inteligencia == 0)
+      if(inteligenciaTotal == 0)
       {
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine($"Intelligence({inteligenciaTotal})");
@@ -103,7 +100,7 @@ public class Criar
         Console.WriteLine($"Intelligence({inteligenciaTotal})");
       }
 
-      if(vitalidade == 0)
+      if(vitalidadeTotal == 0)
       {
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine($"Vitality({vitalidadeTotal})");
@@ -120,7 +117,7 @@ public class Criar
       do
       {
         opcao = Console.ReadLine();
-      }while(opcao == String.Empty && opcao != "s" && opcao != "S" && opcao != "d" && opcao != "D" && opcao != "i" && opcao != "I" && opcao != "v" && opcao != "V" && opcao != "x" && opcao != "X");
+      }while(opcao == String.Empty);
       
       switch(opcao)
       {
@@ -184,8 +181,26 @@ public class Criar
         case "X":
           Verificacao(atributo, atributosGastos, totalAtributos, forca, destreza, inteligencia, vitalidade);
           break;
+
+        default:
+          break;
       }
-    }   
+      if(opcao == "x" || opcao == "X")
+      {
+        break;
+      }
+    }  
+
+    float PdVTotal = vitalidade * 10 + 10;
+    float PdMTotal = inteligencia * 5 + 10;
+
+    Listas.RepositorioJogador(nome, experiencia, PdVTotal, PdMTotal, atributo, forca, destreza, inteligencia, vitalidade, temArma, temArmadura);
+
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"{nome} was now born into the arena.");
+    Console.ResetColor();
+    Console.ReadLine();
+    Console.Clear();
   }
 
   public static void Verificacao(float atributo2, float atributosGastos2, float totalAtributo2, float forcaFinal, float destrezaFinal, float inteligenciaFinal, float vitalidadeFinal) 
@@ -214,5 +229,3 @@ public class Criar
     }
   }
 }
-
-

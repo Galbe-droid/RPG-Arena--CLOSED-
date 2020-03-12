@@ -9,7 +9,7 @@ class ModificarAtributos
     Console.WriteLine("===Strength===");
     Console.WriteLine("Discription TBW");
 
-    Console.WriteLine("Points: ");
+    Console.Write("Points: ");
     forca2 = Convert.ToSingle(Console.ReadLine());
 
     return forca2;

@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-class Player
+public class Player
 {
-  private int IDPlayer;
+  public int IDPlayer;
   //Informação do perosnagem
   public string NomePlayer;
   //public Job Profissão;

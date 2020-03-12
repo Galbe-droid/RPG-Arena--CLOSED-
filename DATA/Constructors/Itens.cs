@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-class Armas
+public class Armas
 {
   //Informação da arma
   private int IDArmas;
@@ -26,7 +26,7 @@ class Armas
   }
 }
 
-class Itens
+public class Itens
 {
   //Informação do item
   private int IDItens;
