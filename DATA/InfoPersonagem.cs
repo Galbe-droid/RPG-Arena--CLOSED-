@@ -26,7 +26,7 @@ class InfoPersonagem
         Console.WriteLine("=========Barracks========");
         Console.ResetColor();
 
-        Console.WriteLine("You wish to... ?\nA - ...view All character.\nB - ...view a specific character\n C - Delete a Character.\nX - ... go back. ");
+        Console.WriteLine("You wish to... ?\nA - ...view All character.\nB - ...view a specific character\nC - ...delete a Character.\nX - ... go back. ");
 
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("===========================");
@@ -35,23 +35,24 @@ class InfoPersonagem
         Console.Write("Option: ");
         do
         {
-        opcaoInfo = Console.ReadLine();
+        opcaoInfo = Console.ReadLine().ToUpper();
         }while(opcaoInfo == String.Empty);
 
         switch(opcaoInfo)
         {
-          case "a":
           case "A":
             Console.Clear();
             TodosJogadores();
             break;
 
-          case "b":
           case "B":
+            Console.Clear();
+            JogadorEspecifico();
             break;
 
-          case "c":
           case "C":
+            Console.Clear();
+            DeletarJogador();
             break;
 
           default:
@@ -78,10 +79,10 @@ class InfoPersonagem
       Console.WriteLine("===========================");
       Console.ResetColor();
 
-      Console.WriteLine($"Character ID:{p.IDPlayer}");
+      Console.WriteLine($"Character ID: {p.IDPlayer}");
 
-      Console.WriteLine($"Character Name:{p.NomePlayer}");
-      Console.WriteLine($"Character Experience:{p.Experiencia}");
+      Console.WriteLine($"Character Name: {p.NomePlayer}");
+      Console.WriteLine($"Character Experience: {p.Experiencia}");
       
       Console.WriteLine();
 
@@ -99,4 +100,80 @@ class InfoPersonagem
     Console.ReadLine();
     Console.Clear();
   }
+
+  public static void JogadorEspecifico()
+  {
+    string nome;
+    List<string> lista_de_personagens = new List<string>();
+    Console.WriteLine("Characters resting at barracks: \n");
+    foreach(Player p in Listas.jogadores)
+    {
+      lista_de_personagens.Add(p.NomePlayer);
+      Console.WriteLine($"> {p.NomePlayer}");
+      Console.WriteLine();
+    }
+    while(true)
+    {
+      Console.WriteLine("Choose a character: ");
+      nome = Console.ReadLine().ToUpper();
+      foreach(Player p in Listas.jogadores)
+      {
+        if(nome == p.NomePlayer.ToUpper())
+        {
+          Console.ForegroundColor = ConsoleColor.Red;
+          Console.WriteLine("===========================");
+          Console.ResetColor();
+
+          Console.WriteLine($"Character ID: {p.IDPlayer}");
+
+          Console.WriteLine($"Character Name: {p.NomePlayer}");
+          Console.WriteLine($"Character Experience: {p.Experiencia}");
+          
+          Console.WriteLine();
+
+          Console.WriteLine($"Max HP: {p.PontoDeVida}    Max MP: {p.PontoDeMana}");
+
+          Console.WriteLine();
+
+          Console.WriteLine($"Str:{p.Forca} / Dex:{p.Destreza} / Int: {p.Inteligencia} / Vit: {p.Vitalidade}");
+
+          Console.ForegroundColor = ConsoleColor.Red;
+          Console.WriteLine("===========================");
+          Console.ResetColor(); 
+          break;
+        }
+      }
+      break;
+    }
+    Console.WriteLine("Press Any key to exit.");
+    Console.ReadLine();
+    Console.Clear();
+  }
+
+
+  public static void DeletarJogador()
+  {
+    string nome;
+    List<string> lista_de_personagens = new List<string>();
+    Console.WriteLine("Characters resting at barracks: \n");
+    foreach(Player p in Listas.jogadores)
+    {
+      lista_de_personagens.Add(p.NomePlayer);
+      Console.WriteLine($"> {p.NomePlayer}");
+      Console.WriteLine();
+    }
+    while(true)
+    {
+      Console.WriteLine("Choose a character to delete: ");
+      nome = Console.ReadLine().ToUpper();
+      foreach(Player p in Listas.jogadores)
+      {
+        if(nome == p.NomePlayer.ToUpper())
+        {
+          Listas.Remove(nome);
+        }
+      }
+    }
+  }
+
 }

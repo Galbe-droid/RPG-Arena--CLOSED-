@@ -116,12 +116,11 @@ public class Criar
       Console.Write("Option: ");
       do
       {
-        opcao = Console.ReadLine();
+        opcao = Console.ReadLine().ToUpper();
       }while(opcao == String.Empty);
       
       switch(opcao)
       {
-        case "s":
         case "S":
           forca = ModificarAtributos.Forca(forca);
 
@@ -135,7 +134,6 @@ public class Criar
           forcaTotal = forca + forcaTotal;
           break;
 
-        case "d":
         case "D":
           destreza = ModificarAtributos.Destreza(destreza);
 
@@ -149,7 +147,6 @@ public class Criar
           destrezaTotal = destreza + destrezaTotal;
           break;
 
-        case "i":
         case "I":
           inteligencia = ModificarAtributos.Inteligencia(inteligencia);
 
@@ -163,7 +160,6 @@ public class Criar
           inteligenciaTotal = inteligencia + inteligenciaTotal;
           break;
 
-        case "v":
         case "V":
           vitalidade = ModificarAtributos.Vitalidade(vitalidade);
 
@@ -177,7 +173,6 @@ public class Criar
           vitalidadeTotal = vitalidade + vitalidadeTotal;
           break;
 
-        case "x":
         case "X":
           Verificacao(atributo, atributosGastos, totalAtributos, forca, destreza, inteligencia, vitalidade);
           break;
@@ -185,7 +180,7 @@ public class Criar
         default:
           break;
       }
-      if(opcao == "x" || opcao == "X")
+      if(opcao == "X")
       {
         break;
       }
@@ -194,7 +189,7 @@ public class Criar
     float PdVTotal = vitalidade * 10 + 10;
     float PdMTotal = inteligencia * 5 + 10;
 
-    Listas.RepositorioJogador(nome, experiencia, PdVTotal, PdMTotal, atributo, forca, destreza, inteligencia, vitalidade, temArma, temArmadura);
+    Listas.RepositorioJogador(nome, experiencia, PdVTotal, PdMTotal, atributo, forcaTotal, destrezaTotal, inteligenciaTotal, vitalidadeTotal, temArma, temArmadura);
 
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine($"{nome} was now born into the arena.");

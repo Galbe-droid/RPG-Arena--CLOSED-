@@ -8,12 +8,10 @@ class MenuPrincipal
   {
     switch(escolha)
     {
-      case "a":
       case "A":
         Criar.Personagem();
         break;
 
-      case "l":
       case "L":
         if(Directory.GetFiles($@"DATA/PersonagensSalvos").Length == 0)
         {
@@ -30,13 +28,11 @@ class MenuPrincipal
           break;
         }
 
-      case "c":
       case "C":
         InfoPersonagem.Mostragem();
         break;
 
-       case "I":
-       case "i":
+      case "I":
         break; 
       
       default:

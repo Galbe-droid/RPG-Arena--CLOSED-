@@ -40,9 +40,9 @@ class MainClass {
       Console.WriteLine("===========================");
 
       Console.Write("Option: ");
-      opcao = Console.ReadLine();
+      opcao = Console.ReadLine().ToUpper();
 
-      if(opcao == "X" || opcao == "x")
+      if(opcao == "X")
       {
         Console.Clear();
         Console.WriteLine("Program Closed");
