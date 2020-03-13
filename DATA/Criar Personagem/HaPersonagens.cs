@@ -5,11 +5,10 @@ using System.Collections.Generic;
 
 public class Confirmacao
 {
-  public static bool ExistePersonagem(int jogadorConfirmados)
+  public static bool ExistePersonagem()
   {
     
-
-    if(Directory.GetFiles($@"DATA/PersonagensSalvos").Length == 0 && jogadorConfirmados == 0)
+    if(Directory.GetFiles($@"DATA/PersonagensSalvos").Length == 0)
     {
       return false;
     }

@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class Armas
 {
   //Informação da arma
-  private int IDArmas;
-  public string NomeArma;
-  public string Descrição;
+  private int IDArmas {get; set;}
+  public string NomeArma {get; set;}
+  public string Descrição {get; set;}
 
   //Status da arma 
-  public float Dano;
-  public float Nivel; 
+  public float Dano {get; set;}
+  public float Nivel {get; set;} 
   //public Job Permitido;
 
-  public bool NaLoja;
+  public bool NaLoja {get; set;}
 
   public Armas (int idArmas, string nomeArma, float dano, float nivel, bool naLoja)
   {
@@ -29,18 +29,18 @@ public class Armas
 public class Itens
 {
   //Informação do item
-  private int IDItens;
-  public string NomeItem;
-  public string Descrição;
+  private int IDItens {get; set;}
+  public string NomeItem {get; set;}
+  public string Descrição {get; set;}
 
   //Valores do item;
   //buff
-  public float ValorPositivo;
+  public float ValorPositivo {get; set;}
   //debuff
-  public float ValorNegativo; 
+  public float ValorNegativo {get; set;} 
 
   //Pode ser usado em combate
-  public bool EmCombate; 
+  public bool EmCombate {get; set;} 
   //Sera encontrado na loja
-  public bool NaLoja; 
+  public bool NaLoja {get; set;}
 }

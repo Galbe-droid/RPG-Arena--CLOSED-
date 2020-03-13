@@ -1,8 +1,11 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-//using System.Text.Json;
-//using System.Text.Json.Serialization;
+
+//Repl.it não reconhece essas bibliotecas 
+
+//using System.Text.Json; <<<
+//using System.Text.Json.Serialization; <<<
 
 /*class Empacotar
 {

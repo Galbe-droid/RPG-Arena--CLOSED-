@@ -32,6 +32,7 @@ class MenuPrincipal
 
       case "c":
       case "C":
+        InfoPersonagem.Mostragem();
         break;
 
        case "I":

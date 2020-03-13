@@ -6,7 +6,7 @@ public class Criar
 {
   public static void Personagem()
   {  
-    string nome;
+    string nome = "";
 
     float experiencia = 0;
 

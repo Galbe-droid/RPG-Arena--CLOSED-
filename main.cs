@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 class MainClass {
   public static void Main (string[] args) {
-  Console.ReadKey();
-  Console.Clear();
+    Console.ReadKey();
+    Console.Clear();
 
     string opcao;
     while(true)
