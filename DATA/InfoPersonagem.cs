@@ -9,7 +9,7 @@ class InfoPersonagem
     string opcaoInfo;
     bool listaVazia; 
 
-    if(Listas.jogadores == null)
+    if(Listas.jogadores.Count == 0)
     {
       listaVazia = true;
     }
@@ -22,6 +22,8 @@ class InfoPersonagem
     {
       if(listaVazia != true)
       {
+        Console.Clear();
+
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("=========Barracks========");
         Console.ResetColor();
@@ -55,6 +57,10 @@ class InfoPersonagem
             DeletarJogador();
             break;
 
+          case "X":
+            Console.Clear();
+            break;
+
           default:
             Console.Clear();
             break;
@@ -65,12 +71,12 @@ class InfoPersonagem
         Console.WriteLine("The barracks are empty, try creating a character first.");
         Console.ReadLine();
         Console.Clear();
-      break;
+        break;
       }
-    break;
+      break;
     }
   }
-
+  //Lista mostra todos os jogadores: Funcionando
   public static void TodosJogadores()
   {
     foreach(Player p in Listas.jogadores)
@@ -101,6 +107,7 @@ class InfoPersonagem
     Console.Clear();
   }
 
+  //Lista mostra 1 jogador em especifico: Funcionando
   public static void JogadorEspecifico()
   {
     string nome;
@@ -114,8 +121,9 @@ class InfoPersonagem
     }
     while(true)
     {
-      Console.WriteLine("Choose a character: ");
+      Console.Write("Choose a character: ");
       nome = Console.ReadLine().ToUpper();
+      Console.WriteLine();
       foreach(Player p in Listas.jogadores)
       {
         if(nome == p.NomePlayer.ToUpper())
@@ -150,30 +158,29 @@ class InfoPersonagem
     Console.Clear();
   }
 
-
+  //Lista para deletar um jogador: Funcionado Obrigado Stackoverflow 
   public static void DeletarJogador()
   {
-    string nome;
-    List<string> lista_de_personagens = new List<string>();
+    int ID;
     Console.WriteLine("Characters resting at barracks: \n");
     foreach(Player p in Listas.jogadores)
     {
-      lista_de_personagens.Add(p.NomePlayer);
-      Console.WriteLine($"> {p.NomePlayer}");
+      Console.WriteLine($">Name: {p.NomePlayer}           ID: {p.IDPlayer}");
       Console.WriteLine();
     }
     while(true)
     {
-      Console.WriteLine("Choose a character to delete: ");
-      nome = Console.ReadLine().ToUpper();
-      foreach(Player p in Listas.jogadores)
+      Console.Write("Choose a character to delete, by ID: ");
+      ID = Convert.ToInt32(Console.ReadLine());
+
+      for(int i = 0 ; i <= Listas.jogadores.Count; i++)
       {
-        if(nome == p.NomePlayer.ToUpper())
+        if(ID == Listas.jogadores[i].IDPlayer)
         {
-          Listas.Remove(nome);
+          Listas.jogadores.RemoveAt(i);
         }
       }
+      Console.Clear();
     }
   }
-
 }

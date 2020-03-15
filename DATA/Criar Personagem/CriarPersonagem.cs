@@ -174,7 +174,7 @@ public class Criar
           break;
 
         case "X":
-          Verificacao(atributo, atributosGastos, totalAtributos, forca, destreza, inteligencia, vitalidade);
+          Verificacao(atributo, atributosGastos, totalAtributos, forcaTotal, destrezaTotal, inteligenciaTotal, vitalidadeTotal);
           break;
 
         default:
