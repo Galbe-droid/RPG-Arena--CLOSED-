@@ -8,6 +8,7 @@ class Bestiario
 
   public static void AdicionarMonstros()
   {
-    Listas.AdicionarMonstros("Slime", 1, "Ground", 1, 1, 1, 4, 4, 2, 2);
+    //(nome, rank, categoria, nivel, For, Des, int, vit)
+    Listas.AdicionarMonstros("Slime", 1, "Ground", 1, 4, 4, 2, 2);
   }
 }

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-class Temporario
+class InfoMonstros
 {
   public static void Bestiario()
   {
@@ -10,6 +10,5 @@ class Temporario
     {
       Console.WriteLine($"{m.IDMonstro},{m.Nome},{m.Rank},{m.Categoria},{m.Nivel},{m.PontosDeVida},{m.PontosDeMana},{m.Forca},{m.Destreza},{m.Inteligencia},{m.Vitalidade}");
     }
-	Console.WriteLine($"{Listas.monstro}");
   } 
 }

@@ -6,12 +6,13 @@ class MainClass {
   public static void Main (string[] args) {
     Console.ReadKey();
     Console.Clear();
+
+    //Carregamento dos monstros
     Bestiario.AdicionarMonstros();
 
     string opcao;
     while(true)
     {
-      Console.WriteLine(Listas.monstro.Count);
       bool existePersonagem;
 
       Console.ForegroundColor = ConsoleColor.Red;

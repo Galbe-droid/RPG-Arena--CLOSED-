@@ -35,8 +35,8 @@ public class Monstro
     Categoria = cateogria;
     Nivel = nivel;
     
-    PontosDeVida = (Vitalidade + (3 + rank)) + 10;
-    PontosDeMana = (Inteligencia + (3 + rank))  + 10;
+    PontosDeVida = (Vitalidade + (3 + rank)) * 8 + 5;
+    PontosDeMana = (Inteligencia + (3 + rank))  * 5 + 3;
    
     Forca = For;
     Destreza = Des;

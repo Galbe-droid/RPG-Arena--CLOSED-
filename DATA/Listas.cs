@@ -21,14 +21,12 @@ using System.Collections.Generic;
     int contador = jogadores.Count;
   }
 
-  public static void AdicionarMonstros(string nome, int rank, string categoria, int nivel, float hp, float mp, float For, float Des, float Int, float Vit)
+  public static void AdicionarMonstros(string nome, int rank, string categoria, int nivel, float For, float Des, float Int, float Vit)
   {
-    //(ID, nome, rank, categoria, nivel, HP, MP, For, Des, int, vit)
     int ID = monstro.Count + 1;
-    //float PdVMonstro = 1;
-    //float PdMMonstro = 1;
+    float PdVMonstro = 1;
+    float PdMMonstro = 1;
     
-    monstro.Add(new Monstro(ID, nome, rank, categoria, nivel, hp, mp, For, Des, Int, Vit));
-    //monstro.Add(Slime);
+    monstro.Add(new Monstro(ID, nome, rank, categoria, nivel, PdVMonstro, PdMMonstro, For, Des, Int, Vit));
   }
 }
