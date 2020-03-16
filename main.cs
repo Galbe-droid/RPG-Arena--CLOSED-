@@ -6,10 +6,12 @@ class MainClass {
   public static void Main (string[] args) {
     Console.ReadKey();
     Console.Clear();
+    Bestiario.AdicionarMonstros();
 
     string opcao;
     while(true)
     {
+      Console.WriteLine(Listas.monstro.Count);
       bool existePersonagem;
 
       Console.ForegroundColor = ConsoleColor.Red;
@@ -33,6 +35,7 @@ class MainClass {
 
       Console.WriteLine("C - Characters ");
       Console.WriteLine("I - Information ");
+      Console.WriteLine("B - Bestiary");
 
       Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("X - Exit");

@@ -33,7 +33,11 @@ class MenuPrincipal
         break;
 
       case "I":
+        Temporario.Bestiario();
         break; 
+
+      case "B":
+        
       
       default:
         Console.WriteLine("Invalid option, try again!");
