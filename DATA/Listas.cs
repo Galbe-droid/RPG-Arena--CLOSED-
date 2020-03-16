@@ -11,9 +11,12 @@ using System.Collections.Generic;
   //public static List<Itens> consumiveis;
   
   //Adiciona o personagem a uma lista
-  public static void RepositorioJogador(string nome, float experiencia, float PdVTotal, float PdMTotal, float atributo, float forca, float destreza, float inteligencia, float vitalidade, bool temArma, bool temArmadura)
+  public static void RepositorioJogador(string nome, float experiencia, float atributo, float forca, float destreza, float inteligencia, float vitalidade, bool temArma, bool temArmadura)
   {
     int ID = jogadores.Count + 1;
+
+    float PdVTotal = vitalidade * 10 + 10;
+    float PdMTotal = inteligencia * 5 + 10;
 
     jogadores.Add(new Player(ID, nome, experiencia, PdVTotal, PdMTotal, atributo, forca, destreza, inteligencia, vitalidade, temArma, temArmadura));
 
@@ -24,9 +27,11 @@ using System.Collections.Generic;
   public static void AdicionarMonstros(string nome, int rank, string categoria, int nivel, float For, float Des, float Int, float Vit)
   {
     int ID = monstro.Count + 1;
-    float PdVMonstro = 1;
-    float PdMMonstro = 1;
+    float PdVMonstro = (Vit + rank) * 8 + 5;
+    float PdMMonstro = (Int + rank) * 5 + 3;
     
     monstro.Add(new Monstro(ID, nome, rank, categoria, nivel, PdVMonstro, PdMMonstro, For, Des, Int, Vit));
+
+    int contador = monstro.Count;
   }
 }

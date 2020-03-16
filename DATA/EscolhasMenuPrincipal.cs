@@ -8,6 +8,10 @@ class MenuPrincipal
   {
     switch(escolha)
     {
+      case"N":
+        Selecao.SelecionarPersonagem();
+        break;
+
       case "A":
         Criar.Personagem();
         break;

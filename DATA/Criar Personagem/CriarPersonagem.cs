@@ -185,11 +185,8 @@ public class Criar
         break;
       }
     }  
-
-    float PdVTotal = vitalidade * 10 + 10;
-    float PdMTotal = inteligencia * 5 + 10;
-
-    Listas.RepositorioJogador(nome, experiencia, PdVTotal, PdMTotal, atributo, forcaTotal, destrezaTotal, inteligenciaTotal, vitalidadeTotal, temArma, temArmadura);
+    
+    Listas.RepositorioJogador(nome, experiencia, atributo, forcaTotal, destrezaTotal, inteligenciaTotal, vitalidadeTotal, temArma, temArmadura);
 
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine($"{nome} was now born into the arena.");

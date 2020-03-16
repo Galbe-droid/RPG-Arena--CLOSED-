@@ -1,0 +1,117 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+
+class Selecao
+{
+  public static void SelecionarPersonagem()
+  {
+    Console.Clear();
+    string nomeSelecao = "";
+    float experienciaSelecao = 0;
+
+    float pdvSelecao = 0;
+    float pdmSelecao = 0;
+
+    float forcaSelecao = 0;
+    float destrezaSelecao = 0;
+    float inteligenciaSelecao = 0;
+    float vitalidadeSelecao = 0;
+
+    bool temArma = false;
+    bool temArmadura = false;
+
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("   Character Selection");  
+    Console.WriteLine("===========================");
+    Console.ResetColor();
+
+    string opcaoPersonagem;
+    string escolherDenovo;
+    foreach(Player p in Listas.jogadores)
+    {
+      Console.WriteLine($"Name: {p.NomePlayer}");
+    }
+
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("===========================");
+    Console.ResetColor();
+
+    while(true)
+    {
+      Console.WriteLine("Select a character by NAME.");
+      Console.Write("Name: ");
+      do
+      {
+        opcaoPersonagem = Console.ReadLine().ToUpper();
+      }while(opcaoPersonagem == String.Empty);
+
+      foreach(Player p in Listas.jogadores)
+      {
+        if(opcaoPersonagem == p.NomePlayer.ToUpper())
+        {
+          //transporta os valores da lista para uma variavel que sera usada dentro do jogo
+
+          nomeSelecao = p.NomePlayer;
+          experienciaSelecao = p.Experiencia;
+          pdvSelecao = p.PontoDeVida;
+          pdmSelecao = p.PontoDeMana;
+          forcaSelecao = p.Forca;
+          destrezaSelecao = p.Destreza;
+          inteligenciaSelecao = p.Inteligencia;
+          vitalidadeSelecao = p.Vitalidade;
+          temArma = p.TemArma;
+          temArmadura = p.TemArmadura;
+        }
+      }
+
+      Console.WriteLine("You are going to take control of...");
+
+      Console.ForegroundColor = ConsoleColor.Red;
+      Console.WriteLine($"============={nomeSelecao}==============");
+      Console.ResetColor();
+
+      Console.WriteLine($"Character Experience: {experienciaSelecao}");
+      
+      Console.WriteLine();
+
+      Console.WriteLine($"Max HP: {pdvSelecao}    Max MP: {pdmSelecao}");
+
+      Console.WriteLine();
+
+      Console.WriteLine($"Str:{forcaSelecao} / Dex:{destrezaSelecao} / Int: {inteligenciaSelecao} / Vit: {vitalidadeSelecao}");
+
+      Console.ForegroundColor = ConsoleColor.Red;
+      Console.WriteLine("===========================");
+      Console.ResetColor();
+
+      Console.WriteLine("This is your choice ? [Y/N]");
+      Console.Write(">>> Option: ");
+      escolherDenovo = Console.ReadLine().ToUpper();
+
+      if(escolherDenovo == "Y")
+      {
+        EntradaArena.VisaoPersonagem(nomeSelecao, experienciaSelecao, pdvSelecao, pdmSelecao, forcaSelecao, destrezaSelecao, inteligenciaSelecao, vitalidadeSelecao, temArma, temArmadura);
+      }
+    }
+  }
+
+  public static void SelecionarMonstro()
+  {
+    //Gera uma seleção aleatoria dos monstros que aparecerão na arena.
+    int contador = Listas.monstro.Count;
+    Random rnd = new Random();
+    for(int i = 0; i < 3; i++)
+    {
+      int IDSorteio = rnd.Next(1,contador+1);
+      Console.Write(IDSorteio);
+      foreach(Monstro m in Listas.monstro)
+      {
+        if(IDSorteio == m.IDMonstro)
+        {
+          Console.WriteLine(m.Nome);
+        }
+      }
+    }
+  }
+}

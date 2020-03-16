@@ -7,8 +7,10 @@ class MainClass {
     Console.ReadKey();
     Console.Clear();
 
+    
     //Carregamento dos monstros
     Bestiario.AdicionarMonstros();
+
 
     string opcao;
     while(true)
@@ -20,6 +22,18 @@ class MainClass {
       Console.ResetColor();
 
       Console.WriteLine("===========================");
+
+      if(Listas.jogadores.Count == 0)
+      {
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("N - New Game ");
+        Console.ResetColor();
+      }
+      else
+      {
+        Console.WriteLine("N - New Game ");
+      }
+
       Console.WriteLine("A - New Character ");
 
       existePersonagem = Confirmacao.ExistePersonagem();

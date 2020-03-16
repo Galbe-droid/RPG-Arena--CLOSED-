@@ -40,6 +40,11 @@ class InfoPersonagem
         opcaoInfo = Console.ReadLine().ToUpper();
         }while(opcaoInfo == String.Empty);
 
+        if(opcaoInfo == "X")
+        {
+          break;
+        }
+
         switch(opcaoInfo)
         {
           case "A":
@@ -55,10 +60,6 @@ class InfoPersonagem
           case "C":
             Console.Clear();
             DeletarJogador();
-            break;
-
-          case "X":
-            Console.Clear();
             break;
 
           default:
