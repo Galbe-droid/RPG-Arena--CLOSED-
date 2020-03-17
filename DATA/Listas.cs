@@ -6,6 +6,9 @@ using System.Collections.Generic;
 {
   public static List<Player> jogadores = new List<Player>();
   public static List<Monstro> monstro = new List<Monstro>();
+
+  //Lista dentro arena
+  public static List<Monstro> monstroDia = new List<Monstro>();
   
   //public static List<Armas> armamentos;
   //public static List<Itens> consumiveis;
@@ -31,6 +34,18 @@ using System.Collections.Generic;
     float PdMMonstro = (Int + rank) * 5 + 3;
     
     monstro.Add(new Monstro(ID, nome, rank, categoria, nivel, PdVMonstro, PdMMonstro, For, Des, Int, Vit));
+
+    int contador = monstro.Count;
+  }
+
+  //Essa lista e para os monstros que pode ser enfrentados na arena, essa lista e deletada e recriado todo inicio de dia 
+  public static void AdicionarMonstrosDia(string nome, int rank, string categoria, int nivel, float For, float Des, float Int, float Vit)
+  {
+    int ID = monstroDia.Count + 1;
+    float PdVMonstro = (Vit + rank) * 8 + 5;
+    float PdMMonstro = (Int + rank) * 5 + 3;
+    
+    monstroDia.Add(new Monstro(ID, nome, rank, categoria, nivel, PdVMonstro, PdMMonstro, For, Des, Int, Vit));
 
     int contador = monstro.Count;
   }

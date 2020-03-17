@@ -2,36 +2,19 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-class EntradaArena
+class HUD
 {
-  public static void VisaoPersonagem(string nomeP, float expP,float pdvP, float pdmP, float forP, float desP, float intP, float vitP, bool armaP, bool armaduraP)
+  //Informação sobre os status do jogador
+  public static void InformacoesGerais(string nomeHUD, float expHUD, float forHUD, float desHUD, float intHUD, float vitHUD)
   {
-    Console.Clear();
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("       Arena Entrace");  
-    Console.WriteLine("===========================");
-    Console.ResetColor();
-
-    Console.WriteLine($"Nome: {nomeP}     Exp: {expP}");
+    Console.WriteLine($"Nome: {nomeHUD}     Exp: {expHUD}");
     Console.WriteLine();
-    Console.WriteLine($"Str:{forP} / Dex:{desP} / Int:{intP} / Vit:{vitP}");
-    Console.WriteLine();
-
-    HUD(pdvP, pdmP);
-    
-    Console.WriteLine();
-
-    Equipamentos(armaP, armaduraP);
-
-    Console.ReadLine();
-
+    Console.WriteLine($"Str:{forHUD} / Dex:{desHUD} / Int:{intHUD} / Vit:{vitHUD}");
   }
 
-  public static void HUD(float vidaMax , float manaMax)
+  //Informação visual sobre a vida e a energia do jogador
+  public static void VidaMana(float vidaMax , float manaMax, float dano, float manaGasta)
   {
-    float dano = 20;
-    float manaGasta = 0;
-
     float vidaAtual = vidaMax - dano;
     float manaAtual = manaMax - manaGasta;
 
@@ -76,6 +59,7 @@ class EntradaArena
     Console.ResetColor();
   }
 
+  //Verificar se ha equipamentos no jogador
   public static void Equipamentos(bool armaE, bool armaduraE)
   {
     Console.Write("Weapon: ");

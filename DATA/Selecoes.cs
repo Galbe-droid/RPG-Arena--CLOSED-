@@ -92,6 +92,7 @@ class Selecao
       if(escolherDenovo == "Y")
       {
         EntradaArena.VisaoPersonagem(nomeSelecao, experienciaSelecao, pdvSelecao, pdmSelecao, forcaSelecao, destrezaSelecao, inteligenciaSelecao, vitalidadeSelecao, temArma, temArmadura);
+        break;
       }
     }
   }
@@ -104,12 +105,42 @@ class Selecao
     for(int i = 0; i < 3; i++)
     {
       int IDSorteio = rnd.Next(1,contador+1);
-      Console.Write(IDSorteio);
+
       foreach(Monstro m in Listas.monstro)
       {
         if(IDSorteio == m.IDMonstro)
         {
-          Console.WriteLine(m.Nome);
+          int randLVL = m.Nivel + rnd.Next(0, 2);
+          int randRank = m.Rank + rnd.Next(0, 1);
+
+          int extraPoints = (randRank * 2) + (randLVL * 2);
+
+          float extraFor = 0;
+          float extraDes = 0;
+          float extraInt = 0;
+          float extraVit = 0;
+
+          float extraSoma = extraDes + extraFor + extraInt + extraVit;
+
+          while(extraSoma != extraPoints )
+          {
+            extraFor = 0 + rnd.Next(0, extraPoints);
+            
+            extraDes = 0 + rnd.Next(0, extraPoints);
+            
+            extraInt = 0 + rnd.Next(0, extraPoints);
+            
+            extraVit = 0 + rnd.Next(0, extraPoints);
+            
+            extraSoma = extraDes + extraFor + extraInt + extraVit;
+          }
+
+          float novaFor = m.Forca + extraFor;
+          float novaDes = m.Destreza + extraDes;
+          float novaInt = m.Inteligencia + extraInt;
+          float novaVit = m.Vitalidade + extraVit;
+          
+          Listas.AdicionarMonstrosDia(m.Nome, randLVL, m.Categoria, randRank, novaFor, novaDes, novaInt, novaVit);
         }
       }
     }
