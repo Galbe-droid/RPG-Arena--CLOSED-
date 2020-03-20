@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 class EntradaArena
 {
-  public static void VisaoPersonagem(string nomeP, float expP,float pdvP, float pdmP, float forP, float desP, float intP, float vitP, bool armaP, bool armaduraP)
+  public static void VisaoPersonagem(int IDP)
   {
     float danoP = 0;
     float manaGastaP = 0;
     string opcaoArena; 
+    int IDM  = 0;
      
 
     while(true)
@@ -24,16 +25,16 @@ class EntradaArena
         Console.WriteLine($"===========================");
         Console.ResetColor();
 
-        HUD.InformacoesGerais(nomeP, expP, forP, desP, intP, vitP);
+        HUD.InformacoesGerais(IDP);
     
         Console.WriteLine();
 
-        HUD.VidaMana(pdvP, pdmP, danoP, manaGastaP);
+        HUD.VidaMana(IDP, danoP, manaGastaP);
     
         Console.WriteLine();
         Console.WriteLine();
 
-        HUD.Equipamentos(armaP, armaduraP);
+        HUD.Equipamentos(IDP);
 
         Console.ForegroundColor = ConsoleColor.Red; 
         Console.WriteLine("===========================");
@@ -63,14 +64,14 @@ class EntradaArena
 
         } 
 
-        EscolhaArena(opcaoArena);
+        EscolhaArena(opcaoArena, IDP, IDM);
       }
       
       if(opcaoArena == "Y"){Console.Clear(); break;}
     }
   }
 
-  public static void EscolhaArena(string opcao)
+  public static void EscolhaArena(string opcao, int IDP, int IDM)
   {
     switch(opcao)
     {
@@ -78,9 +79,23 @@ class EntradaArena
         Console.WriteLine("This are the monsters we have for today:");
         foreach(Monstro m in Listas.monstroDia)
         {
-          Console.WriteLine($"{m.Nome}, {m.Nivel}, {m.Rank}, {m.Categoria} , {m.PontosDeVida}, {m.PontosDeMana}, {m.Forca}, {m.Destreza}, {m.Inteligencia}, {m.Vitalidade}");
+          Console.ForegroundColor = ConsoleColor.Red;
+          Console.WriteLine($"============Cage{m.IDMonstro}===========");
+          Console.ResetColor();
+
+          Console.WriteLine($"{m.Nome}, {m.Nivel}, {m.Rank}");
+
+          Console.ForegroundColor = ConsoleColor.Red; 
+          Console.WriteLine("===========================");
+          Console.ResetColor();
         }
-        Console.ReadLine();
+       
+        IDM = Convert.ToInt32(Console.ReadLine());
+        if(IDM == Listas.monstroDia[IDM-1].IDMonstro)
+        {
+          HUD.GerarMonstro(IDM);
+        }
+        Combate.CombateTurno(IDP, IDM);
         break;
 
       case"S":

@@ -7,19 +7,7 @@ class Selecao
   public static void SelecionarPersonagem()
   {
     Console.Clear();
-    string nomeSelecao = "";
-    float experienciaSelecao = 0;
-
-    float pdvSelecao = 0;
-    float pdmSelecao = 0;
-
-    float forcaSelecao = 0;
-    float destrezaSelecao = 0;
-    float inteligenciaSelecao = 0;
-    float vitalidadeSelecao = 0;
-
-    bool temArma = false;
-    bool temArmadura = false;
+    int ID = 0;
 
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("   Character Selection");  
@@ -52,34 +40,31 @@ class Selecao
         {
           //transporta os valores da lista para uma variavel que sera usada dentro do jogo
 
-          nomeSelecao = p.NomePlayer;
-          experienciaSelecao = p.Experiencia;
-          pdvSelecao = p.PontoDeVida;
-          pdmSelecao = p.PontoDeMana;
-          forcaSelecao = p.Forca;
-          destrezaSelecao = p.Destreza;
-          inteligenciaSelecao = p.Inteligencia;
-          vitalidadeSelecao = p.Vitalidade;
-          temArma = p.TemArma;
-          temArmadura = p.TemArmadura;
+          ID = p.IDPlayer;
         }
       }
 
       Console.WriteLine("You are going to take control of...");
 
-      Console.ForegroundColor = ConsoleColor.Red;
-      Console.WriteLine($"============={nomeSelecao}==============");
-      Console.ResetColor();
+      foreach(Player p in Listas.jogadores)
+      {
+        if(ID == p.IDPlayer)
+        {
+          Console.ForegroundColor = ConsoleColor.Red;
+          Console.WriteLine($"============={p.NomePlayer}==============");
+          Console.ResetColor();
 
-      Console.WriteLine($"Character Experience: {experienciaSelecao}");
+          Console.WriteLine($"Character Experience: {p.Experiencia}");
       
-      Console.WriteLine();
+          Console.WriteLine();
 
-      Console.WriteLine($"Max HP: {pdvSelecao}    Max MP: {pdmSelecao}");
+          Console.WriteLine($"Max HP: {p.PontoDeVida}    Max MP: {p.PontoDeMana}");
 
-      Console.WriteLine();
+          Console.WriteLine();
 
-      Console.WriteLine($"Str:{forcaSelecao} / Dex:{destrezaSelecao} / Int: {inteligenciaSelecao} / Vit: {vitalidadeSelecao}");
+          Console.WriteLine($"Str:{p.Forca} / Dex:{p.Destreza} / Int: {p.Inteligencia} / Vit: {p.Vitalidade}");
+        }
+      }
 
       Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("===========================");
@@ -91,7 +76,8 @@ class Selecao
 
       if(escolherDenovo == "Y")
       {
-        EntradaArena.VisaoPersonagem(nomeSelecao, experienciaSelecao, pdvSelecao, pdmSelecao, forcaSelecao, destrezaSelecao, inteligenciaSelecao, vitalidadeSelecao, temArma, temArmadura);
+        EntradaArena.VisaoPersonagem(ID);
+        
         break;
       }
     }
