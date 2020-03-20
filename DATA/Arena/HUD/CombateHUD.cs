@@ -25,10 +25,8 @@ class CombateHUD
     Console.ResetColor();
   }
 
-  public static bool PlayerStatus(int IDP, float danoP, float PontoDeVida)
+  public static bool PlayerStatus(int IDP, float danoP, float PontoDeVida, bool playerMorto)
   {
-    bool playerMorto = false;
-
     if(danoP == PontoDeVida)
     {
       playerMorto = true;
@@ -37,28 +35,73 @@ class CombateHUD
     return playerMorto;
   }
 
-  public static void MonstroHUD(int IDM)
+  public static void MonstroHUD(int IDM, float dano)
   {
-    float danoM = 0;
-    float manaGastaM = 0; 
+    float manaGasta = 0; 
 
-    HUD.MonstroInfoBasico(IDM);
-    
-    Console.WriteLine();
+    foreach(Monstro m in Listas.monstroDia)
+    {
+      if(IDM == m.IDMonstro)
+      {
+        Console.WriteLine($"Name: {m.Nome} / Level: {m.Nivel} / Rank: {m.Rank}");
+        Console.WriteLine();
+        Console.WriteLine($"Str:{m.Forca} / Dex:{m.Destreza} / Int:{m.Inteligencia} / Vit:{m.Vitalidade}");
 
-    HUD.MonstroVidaMana(IDM, danoM, manaGastaM);
-    
-    Console.WriteLine();
+        float vidaAtual = m.PontosDeVida - dano;
+        float manaAtual = m.PontosDeMana - manaGasta;
+
+        float barraVida = m.PontosDeVida / 9;
+        float barraMana = m.PontosDeMana / 9;
+
+        float somaVida = 0;
+        float somaMana = 0;
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("HP:");
+        Console.Write("{");
+        
+        while(vidaAtual >= somaVida && vidaAtual <= m.PontosDeVida)
+        {
+          Console.Write("=");
+          somaVida = barraVida + somaVida;
+        }
+        while(vidaAtual <= somaVida && somaVida <= m.PontosDeVida)
+        {
+          Console.Write("-");
+          somaVida = barraVida + somaVida;
+        }
+        Console.Write($"}} {vidaAtual}/{m.PontosDeVida}");
+        Console.ResetColor();
+
+        Console.WriteLine();
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("MP:");
+        Console.Write("{");
+        while(manaAtual >= somaMana && manaAtual <= m.PontosDeMana)
+        {
+          Console.Write("=");
+          somaMana = barraMana + somaMana;
+        }
+        while(manaAtual <= somaVida && somaMana <= m.PontosDeMana)
+        {
+          Console.Write("-");
+          somaMana = barraMana + somaMana;
+        }
+      
+        Console.Write($"}} {manaAtual}/{m.PontosDeMana}");
+        Console.ResetColor();
+        Console.WriteLine();
 
     Console.ForegroundColor = ConsoleColor.Red; 
     Console.WriteLine("===========================");
     Console.ResetColor();
+      }
+  }
   }
 
-  public static bool MonstroStatus(int IDM, float danoM, float PontosDeVida)
+  public static bool MonstroStatus(int IDM, float danoM, float PontosDeVida, bool monstroMorto)
   {
-    bool monstroMorto = false;
-
     if(danoM == PontosDeVida)
     {
       monstroMorto = true;

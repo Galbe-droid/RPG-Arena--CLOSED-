@@ -98,7 +98,7 @@ class HUD
     float dano = 0;
     float manaGasta = 0;
     
-    CombateHUD.MonstroHUD(ID);
+    CombateHUD.MonstroHUD(ID, dano);
     MonstroInfoBasico(ID);
     MonstroVidaMana(ID, dano, manaGasta);
   }
