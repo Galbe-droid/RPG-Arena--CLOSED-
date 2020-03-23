@@ -17,4 +17,30 @@ class Status
     }
     return escaped;
   }
+
+  public static bool DefenderPlayer (bool defesaAtivaP, int cooldown)
+  {
+    if(defesaAtivaP == true && cooldown < 4)
+    {
+      cooldown ++;
+      return defesaAtivaP;
+    }
+    else if(defesaAtivaP == true && cooldown == 4)
+    {
+      defesaAtivaP = false;
+      Console.WriteLine("Defesa Desativada");
+      Console.ReadLine();
+      cooldown = 0;
+      return defesaAtivaP;
+    }
+    else
+    {
+      return defesaAtivaP;
+    }
+  }
+
+  public static bool DefenserMonstro (bool defesaAtivaM, int cooldown)
+  {
+    
+  }
 }

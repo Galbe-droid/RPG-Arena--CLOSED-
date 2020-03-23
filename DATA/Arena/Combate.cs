@@ -7,8 +7,16 @@ public class Combate
   public static void CombateTurno(int IDP, int IDM)
   {
     Random rnd = new Random();
+    bool turnoP = false;
+    bool turnoM = false;
+
     float danoP = 0;
     float danoM = 0;
+    int cooldownDefesaP = 0;
+    int cooldownDefesaM = 0;
+
+    bool defesaExtraP = false;
+    bool defesaExtraM = false;
 
     float manaGastaP = 0;
     float manaGastaM = 0;
@@ -57,13 +65,16 @@ public class Combate
     bool escape = false;
     int turno = 1;
 
+
     while(escape == false)
     {
+    
     float iniciativaP;
     float iniciativaM;
 
-    bool turnoP = false;
-    bool turnoM = false;
+    turnoP = false;
+    turnoM = false;
+    
     float escaparP = desP + rnd.Next(1,20);
     float impedirM = desM + rnd.Next(1,20);
       
@@ -80,7 +91,7 @@ public class Combate
     }while(iniciativaM == iniciativaP);
 
     while(turnoP != true && turnoM != true )
-    {
+    {    
       CombateHUD.PlayerHUD(IDP);
       CombateHUD.PlayerStatus(IDP, danoM, PontoDeVida, playerMorto);
 
@@ -88,13 +99,12 @@ public class Combate
       CombateHUD.MonstroStatus(IDM, danoM, PontosDeVida, monstroMorto);
 
 
-      if(iniciativaP > iniciativaM && turnoP == false && playerMorto == false)
+      while(iniciativaP > iniciativaM || turnoP == false && playerMorto == false)
       {
         Console.WriteLine("Player Move");
         string decisao;
         Console.WriteLine("A - Attack\nD - Defense\nR - Run");
         Console.Write(">>> Option: ");
-
         do
         {
           decisao = Console.ReadLine().ToUpper();
@@ -109,25 +119,26 @@ public class Combate
           switch(decisao)
           {
             case"A":
-                danoM = danoM + AtaquePlayer(nomeP, nomeM,desP, desM, forP, vitM, danoM);
+                danoM = danoM + AtaquePlayer(nomeP, nomeM,desP, desM, forP, vitM, danoM,defesaExtraM);
               break;
-
             case"D":
-              break;
-
-            default:
-              Console.WriteLine("Invalid Option.");
+              defesaExtraP = true;
+              Console.WriteLine("Defesa ativada");
+              Console.ReadLine();
               break;
           }
         }
         turnoP = true;
+        break;
       }
-      else if(iniciativaP < iniciativaM && turnoM == false && monstroMorto == false)
+      while(iniciativaP < iniciativaM || turnoM == false && monstroMorto == false)
       {
         Console.WriteLine("Monster Move");
-        turnoP = true;
+        turnoM = true;
+        break;
       }
-
+      
+      //Verificar se esta morto
       if(danoP >= PontoDeVida)
       {
         danoP = PontoDeVida;
@@ -142,32 +153,40 @@ public class Combate
         Console.ReadLine();
       }
 
-      if(monstroMorto == true)
+      //Defesa extra Player
+      defesaExtraP = Status.DefenderPlayer(defesaExtraP, cooldownDefesaP);
+      if(defesaExtraP == true){cooldownDefesaP++;}
+      else if(defesaExtraP == false){cooldownDefesaP = 0;}
+
+      //Defesa extra Monstro
+      defesaExtraM = Status.DefenderMonstro(defesaExtraM, cooldownDefesaM);
+      if(defesaExtraM == true){cooldownDefesaM++;}
+      else if(defesaExtraM == false){cooldownDefesaM = 0;}
+
+      //Fim do Turno
+      if(turnoM == true && turnoP == true){turno++; break;}
+      }
+    
+      //Fim do Combate
+      if(escape == true || monstroMorto == true || playerMorto == true)
       {
         break;
       }
-
-      //Fim do Turno
-      break;
-    }
-    //Fim do Combate
-    
-    if(escape == true || monstroMorto == true || playerMorto == true)
-    {
-      break;
-    }
-    turno++;
     }
   }  
 
 
-  public static float AtaquePlayer(string nomeP, string nomeM,float desP, float desM, float forP, float vitM, float danoM)
+  public static float AtaquePlayer(string nomeP, string nomeM,float desP, float desM, float forP, float vitM, float danoM, bool monstroDefesaExtra)
   {
     Random rnd = new Random();
     float precisaoP = desP + rnd.Next(1,20);
     float esquivaM = desM + rnd.Next(1,20);
 
     float defesaMonstro = vitM + rnd.Next(1,6);
+
+    //Caso monstro tenha usado postura defensiva
+    if(monstroDefesaExtra == true){defesaMonstro = defesaMonstro + vitM};
+
     float golpePlayer = forP + rnd.Next(1,12);
 
     float danoTotal = golpePlayer - defesaMonstro;
