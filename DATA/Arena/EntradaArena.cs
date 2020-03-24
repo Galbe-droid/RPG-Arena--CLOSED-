@@ -7,10 +7,8 @@ class EntradaArena
   public static void VisaoPersonagem(int IDP)
   {
     float danoP = 0;
-    float manaGastaP = 0;
     string opcaoArena; 
     int IDM  = 0;
-     
 
     while(true)
     {
@@ -25,20 +23,7 @@ class EntradaArena
         Console.WriteLine($"===========================");
         Console.ResetColor();
 
-        HUD.InformacoesGerais(IDP);
-    
-        Console.WriteLine();
-
-        HUD.VidaMana(IDP, danoP, manaGastaP);
-    
-        Console.WriteLine();
-        Console.WriteLine();
-
-        HUD.Equipamentos(IDP);
-
-        Console.ForegroundColor = ConsoleColor.Red; 
-        Console.WriteLine("===========================");
-        Console.ResetColor();
+        CombateHUD.PlayerHUD(IDP, danoP);
 
         Console.WriteLine("\n Where to go ?");
 

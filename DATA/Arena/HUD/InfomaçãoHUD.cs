@@ -5,15 +5,9 @@ using System.Collections.Generic;
 class HUD
 {
   //Informação sobre os status do jogador
-  public static void InformacoesGerais(int IDP)
+  /*public static void InformacoesGerais(int IDP)
   {
-    foreach(Player p in Listas.jogadores)
-    {
-      if (IDP == p.IDPlayer)
-      {
-        Console.WriteLine($"Nome: {p.NomePlayer}     Exp: {p.Experiencia}");
-        Console.WriteLine();
-        Console.WriteLine($"Str:{p.Forca} / Dex:{p.Destreza} / Int:{p.Inteligencia} / Vit:{p.Vitalidade}");
+    
       }
     }
   }
@@ -25,48 +19,7 @@ class HUD
     {
       if(IDP == p.IDPlayer)
       {
-        float vidaAtual = p.PontoDeVida - dano;
-        float manaAtual = p.PontoDeMana - manaGasta;
-
-        float barraVida = p.PontoDeVida / 9;
-        float barraMana = p.PontoDeMana / 9;
-
-        float somaVida = 0;
-        float somaMana = 0;
-
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write("HP:");
-        Console.Write("{");
-        while(vidaAtual >= somaVida && vidaAtual <= p.PontoDeVida)
-        {
-          Console.Write("=");
-          somaVida = barraVida + somaVida;
-        }
-        while(vidaAtual <= somaVida && somaVida <= p.PontoDeVida)
-        {
-          Console.Write("-");
-          somaVida = barraVida + somaVida;
-        }
-        Console.Write($"}} {vidaAtual}/{p.PontoDeVida}");
-        Console.ResetColor();
-
-        Console.WriteLine();
-
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.Write("MP:");
-        Console.Write("{");
-        while(manaAtual > somaMana && manaAtual <= p.PontoDeMana)
-        {
-        Console.Write("=");
-        somaMana = barraMana + somaMana;
-        }
-        while(manaAtual < somaVida && somaMana <= p.PontoDeMana)
-        {
-        Console.Write("-");
-        somaMana = barraMana + somaMana;
-        }
-        Console.Write($"}} {manaAtual}/{p.PontoDeMana}");
-        Console.ResetColor();
+        
       }
     }
   }
@@ -78,20 +31,8 @@ class HUD
     {
       if(IDP == p.IDPlayer)
       {
-        Console.Write("Weapon: ");
-        if(p.TemArma == false)
-        {
-         Console.WriteLine("No Weapon");
-        }
-
-        Console.Write("Armor: ");
-        if(p.TemArmadura == false)
-        {
-          Console.WriteLine("No Armor");
-        }
-      }
-    } 
-  }
+        
+  }*/
 
   public static void GerarMonstro(int ID)
   {

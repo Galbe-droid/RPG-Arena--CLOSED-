@@ -28,7 +28,7 @@ class Status
     else if(defesaAtivaP == true && cooldown == 4)
     {
       defesaAtivaP = false;
-      Console.WriteLine("Defesa Desativada");
+      Console.WriteLine("You return to normal combate posture");
       Console.ReadLine();
       cooldown = 0;
       return defesaAtivaP;
@@ -39,8 +39,24 @@ class Status
     }
   }
 
-  public static bool DefenserMonstro (bool defesaAtivaM, int cooldown)
+  public static bool DefenderMonstro (bool defesaAtivaM, int cooldown)
   {
-    
+    if(defesaAtivaM == true && cooldown < 4)
+    {
+      cooldown ++;
+      return defesaAtivaM;
+    }
+    else if(defesaAtivaM == true && cooldown == 4)
+    {
+      defesaAtivaM = false;
+      Console.WriteLine("Monster return to it normal posture");
+      Console.ReadLine();
+      cooldown = 0;
+      return defesaAtivaM;
+    }
+    else
+    {
+      return defesaAtivaM;
+    }
   }
 }

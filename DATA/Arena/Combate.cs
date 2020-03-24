@@ -92,7 +92,7 @@ public class Combate
 
     while(turnoP != true && turnoM != true )
     {    
-      CombateHUD.PlayerHUD(IDP);
+      CombateHUD.PlayerHUD(IDP, danoP);
       CombateHUD.PlayerStatus(IDP, danoM, PontoDeVida, playerMorto);
 
       CombateHUD.MonstroHUD(IDM, danoM);
@@ -119,11 +119,11 @@ public class Combate
           switch(decisao)
           {
             case"A":
-                danoM = danoM + AtaquePlayer(nomeP, nomeM,desP, desM, forP, vitM, danoM,defesaExtraM);
+                danoM = danoM + AtaquePlayer(nomeP, nomeM,desP, desM, forP, vitM, danoM, defesaExtraM);
               break;
             case"D":
               defesaExtraP = true;
-              Console.WriteLine("Defesa ativada");
+              Console.WriteLine($"{nomeP} enter in a defesive posture");
               Console.ReadLine();
               break;
           }
@@ -131,9 +131,26 @@ public class Combate
         turnoP = true;
         break;
       }
-      while(iniciativaP < iniciativaM || turnoM == false && monstroMorto == false)
+      while(iniciativaP < iniciativaM || turnoM == false && monstroMorto == false && escape == false)
       {
         Console.WriteLine("Monster Move");
+
+        int decisao = rnd.Next(1,3);
+
+        if(defesaExtraM == true){decisao = 1;}
+
+        switch(decisao)
+        {
+          case 1:
+            danoP = danoP + AtaqueMonstro(nomeM, nomeP, desM, desP, forM, vitP, danoP, defesaExtraP);
+            break;
+
+          case 2:
+            defesaExtraM = true;
+            Console.WriteLine($"{nomeM} enter in a defensive posture");
+            Console.ReadLine();
+            break;
+        }
         turnoM = true;
         break;
       }
@@ -185,13 +202,12 @@ public class Combate
     float defesaMonstro = vitM + rnd.Next(1,6);
 
     //Caso monstro tenha usado postura defensiva
-    if(monstroDefesaExtra == true){defesaMonstro = defesaMonstro + vitM};
+    if(monstroDefesaExtra == true){defesaMonstro = defesaMonstro + vitM;}
 
     float golpePlayer = forP + rnd.Next(1,12);
 
     float danoTotal = golpePlayer - defesaMonstro;
 
-    Console.WriteLine(danoTotal);
     if(danoTotal < 0)
     {
       danoTotal = 0;
@@ -223,6 +239,57 @@ public class Combate
     else
     {
       Console.WriteLine($"it fails to land the attack");
+      Console.ReadLine();
+      return 0;
+    }
+  }
+
+  public static float AtaqueMonstro(string nomeM, string nomeP,float desM, float desP, float forM, float vitP, float danoP, bool playerDefesaExtra)
+  {
+    Random rnd = new Random();
+    float precisaoM = desM + rnd.Next(1,20);
+    float esquivaP = desP + rnd.Next(1, 20);
+
+    float defesaPlayer = vitP + rnd.Next(1,6);
+
+    //Caso Player esteja com postura defensiva
+    if(playerDefesaExtra == true){defesaPlayer = defesaPlayer + vitP;}
+
+    float golpeMonstro = forM + rnd.Next(1,12);
+
+    float danoTotal = golpeMonstro - defesaPlayer;
+
+    if(danoTotal < 0)
+    {
+      danoTotal = 0;
+    }
+
+    Console.WriteLine($"{nomeM} try to hit'{precisaoM}' {nomeP}.");
+    Console.ReadLine();
+    Console.WriteLine($"{nomeP} try to dodge {nomeM}'s attack and...");
+    Console.ReadLine();
+
+    if(precisaoM >= esquivaP && danoTotal != 0)
+    {
+      Console.WriteLine($"it hits !!!, unfortunaly causing {danoTotal} of damage.");
+      Console.ReadLine();
+      return danoTotal;
+    }
+    else if(precisaoM >= esquivaP && danoTotal == 0)
+    {
+      Console.WriteLine($"it hits !, but {nomeP} manage to block the attack. ");
+      Console.ReadLine();
+      return 0;
+    }
+    else if(precisaoM < esquivaP && esquivaP - precisaoM > 10)
+    {
+      Console.WriteLine($"{nomeM} didn't even hit near {nomeP}");
+      Console.ReadLine();
+      return 0;
+    }
+    else
+    {
+      Console.WriteLine($"{nomeM} fails to land the attack.");
       Console.ReadLine();
       return 0;
     }

@@ -4,22 +4,79 @@ using System.Collections.Generic;
 
 class CombateHUD
 {
-  public static void PlayerHUD(int IDP)
+  public static void PlayerHUD(int IDP, float dano)
   {
-    float danoP = 0;
-    float manaGastaP = 0;
+    float manaGasta = 0;
 
-    HUD.InformacoesGerais(IDP);
+    foreach(Player p in Listas.jogadores)
+    {
+      if (IDP == p.IDPlayer)
+      {
+        Console.WriteLine($"Nome: {p.NomePlayer}     Exp: {p.Experiencia}");
+        Console.WriteLine();
+        Console.WriteLine($"Str:{p.Forca} / Dex:{p.Destreza} / Int:{p.Inteligencia} / Vit:{p.Vitalidade}");
+
+        Console.WriteLine();
+
+        float vidaAtual = p.PontoDeVida - dano;
+        float manaAtual = p.PontoDeMana - manaGasta;
+
+        float barraVida = p.PontoDeVida / 9;
+        float barraMana = p.PontoDeMana / 9;
+
+        float somaVida = 0;
+        float somaMana = 0;
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("HP:");
+        Console.Write("{");
+        while(vidaAtual >= somaVida && vidaAtual <= p.PontoDeVida)
+        {
+          Console.Write("=");
+          somaVida = barraVida + somaVida;
+        }
+        while(vidaAtual <= somaVida && somaVida <= p.PontoDeVida)
+        {
+          Console.Write("-");
+          somaVida = barraVida + somaVida;
+        }
+        Console.Write($"}} {vidaAtual}/{p.PontoDeVida}");
+        Console.ResetColor();
+
+        Console.WriteLine();
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("MP:");
+        Console.Write("{");
+        while(manaAtual > somaMana && manaAtual <= p.PontoDeMana)
+        {
+        Console.Write("=");
+        somaMana = barraMana + somaMana;
+        }
+        while(manaAtual < somaVida && somaMana <= p.PontoDeMana)
+        {
+        Console.Write("-");
+        somaMana = barraMana + somaMana;
+        }
+        Console.Write($"}} {manaAtual}/{p.PontoDeMana}");
+        Console.ResetColor();
     
-    Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
 
-    HUD.VidaMana(IDP, danoP, manaGastaP);
-    
-    Console.WriteLine();
-    Console.WriteLine();
+        Console.Write("Weapon: ");
+        if(p.TemArma == false)
+        {
+         Console.WriteLine("No Weapon");
+        }
 
-    HUD.Equipamentos(IDP);
-
+        Console.Write("Armor: ");
+        if(p.TemArmadura == false)
+        {
+          Console.WriteLine("No Armor");
+        }
+      }
+    } 
     Console.ForegroundColor = ConsoleColor.Red; 
     Console.WriteLine("===========================");
     Console.ResetColor();
