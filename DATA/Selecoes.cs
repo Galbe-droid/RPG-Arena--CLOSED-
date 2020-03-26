@@ -29,18 +29,25 @@ class Selecao
     {
       Console.WriteLine("Select a character by NAME.");
       Console.Write("Name: ");
-      do
-      {
-        opcaoPersonagem = Console.ReadLine().ToUpper();
-      }while(opcaoPersonagem == String.Empty);
-
+    
       foreach(Player p in Listas.jogadores)
       {
-        if(opcaoPersonagem == p.NomePlayer.ToUpper())
+        while(true)
         {
+          do
+          {
+            opcaoPersonagem = Console.ReadLine().ToUpper();
+          }while(opcaoPersonagem == String.Empty);
           //transporta os valores da lista para uma variavel que sera usada dentro do jogo
-
+          if(opcaoPersonagem == p.NomePlayer.ToUpper())
+          {
           ID = p.IDPlayer;
+          break;
+          }
+          else
+          {
+          Console.WriteLine("Character don't exist.");
+          }
         }
       }
 

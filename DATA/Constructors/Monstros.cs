@@ -10,7 +10,7 @@ public class Monstro
   //Quanto maior o rank mais pontos o monstro recebera em seus status
   public int Rank{get; set;}
 
-  //Terrestre, Voador, aquatico 
+  //Agressivo, Defensivo, Neutro
   public string Categoria{get; set;}
 
   public int Nivel{get; set;}
@@ -32,7 +32,7 @@ public class Monstro
     
     Nome = nome;
     Rank = rank;
-    Categoria = cateogria;
+    Categoria = cateogria.ToUpper();
     Nivel = nivel;
     
     PontosDeVida = PdV;

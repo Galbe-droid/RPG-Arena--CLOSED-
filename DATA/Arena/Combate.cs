@@ -9,6 +9,9 @@ public class Combate
     Random rnd = new Random();
     bool turnoP = false;
     bool turnoM = false;
+    
+    float exp = 0;
+    float vitoria = 0;
 
     float danoP = 0;
     float danoM = 0;
@@ -47,6 +50,7 @@ public class Combate
         intP = p.Inteligencia;
         vitP = p.Vitalidade;
         PontoDeVida = p.PontoDeVida;
+        exp = p.Experiencia;
       }
     }
     foreach(Monstro m in Listas.monstroDia)
@@ -59,6 +63,7 @@ public class Combate
         intM = m.Inteligencia;
         vitM = m.Vitalidade;
         PontosDeVida = m.PontosDeVida;
+        vitoria = m.Nivel + m.Rank + rnd.Next(2,5);
       }
     }
 
@@ -160,13 +165,23 @@ public class Combate
       {
         danoP = PontoDeVida;
         playerMorto = true;
+        Console.WriteLine("You were defeat.");
+        Console.ReadLine();
       }
 
       if(danoM >= PontosDeVida)
       {
         danoM = PontosDeVida;
+        exp = Resultado.Experiencia(exp, vitoria);
         monstroMorto = true;
-        Console.WriteLine("O monstro foi derrotado.");
+        foreach(Player p in Listas.jogadores)
+        {
+          if(IDP == p.IDPlayer)
+          {
+            p.Experiencia = exp;
+          }
+        }
+        Console.WriteLine("The Monster was defeat.");
         Console.ReadLine();
       }
 
@@ -190,7 +205,8 @@ public class Combate
         break;
       }
     }
-  }  
+  }
+    
 
 
   public static float AtaquePlayer(string nomeP, string nomeM,float desP, float desM, float forP, float vitM, float danoM, bool monstroDefesaExtra)
@@ -293,5 +309,14 @@ public class Combate
       Console.ReadLine();
       return 0;
     }
+  }
+}
+
+class Resultado
+{
+  public static float Experiencia(float experienciaA, float vitoriaA)
+  {
+    experienciaA = experienciaA + vitoriaA;
+    return experienciaA;
   }
 }
